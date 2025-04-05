@@ -1,16 +1,16 @@
 #include <stdio.h>
 
-#define TAMCli 3
+#define TAMCli 10
 
-#define TAMProd 3
+#define TAMProd 20
 
- 
+
 
 typedef struct {
 
     int id;
 
-    char nome[20];
+    char nome[30];
 
     int quantidade;
 
@@ -18,7 +18,7 @@ typedef struct {
 
 }Produto;
 
- 
+
 
 typedef struct {
 
@@ -28,7 +28,7 @@ typedef struct {
 
 }Cliente;
 
- 
+
 
 typedef struct {
 
@@ -42,95 +42,130 @@ typedef struct {
 
 }Venda;
 
- 
 
- 
 
-void cadastrarCliente (Cliente c[]) {
 
-    for(int i=0; i < TAMCli; i++) {
 
-        printf("Cliente %d, Primeiro Nome: ", i+1);
+void cadastrarCliente (Cliente c[], int *qtd_clientes) {
+    char continuar;
 
-        scanf("%s", c[i].nome );
+    while (*qtd_clientes < TAMCli) {
+        printf("\nCliente %d, Primeiro Nome: ", *qtd_clientes + 1);
+        scanf("%s", c[*qtd_clientes].nome);
+        c[*qtd_clientes].id = *qtd_clientes + 1;
+        (*qtd_clientes)++;
 
-        c[i].id = i+1;
+        if (*qtd_clientes == TAMCli) {
+            printf("\n|LIMITE DE CLIENTES ATINGIDO|\n");
+            break;
+        }
 
+    printf("\nDESEJA CADASTRAR OUTRO CLIENTE? (S ou N): ");
+    scanf(" %c", &continuar);
+        if(continuar == 'n' || continuar == 'N'){
+            break;
+        }
     }
 
 }
 
-void cadastrarProduto (Produto p[]) {
+void cadastrarProduto (Produto p[], int *qtd_produtos) {
+    char continuar;
 
-    for(int i=0; i < TAMProd; i++) {
+    while(*qtd_produtos < TAMProd) {
 
-        printf("\nPrimeiro Nome do Produto %d: ", i+1);
+        printf("\nNome do Produto %d: ", *qtd_produtos + 1);
 
-        scanf("%s", p[i].nome );
+        scanf(" %[^\n]", p[*qtd_produtos].nome); // " %[^\n]" - Permite espaços no nome do produto - LER TUDO ANTES DE CLICAR ENTER
 
         printf("Quantidade: ");
 
-        scanf("%d", &p[i].quantidade);
+        scanf("%d", &p[*qtd_produtos].quantidade);
 
         printf("Valor: ");
 
-        scanf("%f", &p[i].valor);
+        scanf("%f", &p[*qtd_produtos].valor);
 
-        p[i].id = i+1;
+        p[*qtd_produtos].id = *qtd_produtos + 1;
+        (*qtd_produtos)++;
 
+        if (*qtd_produtos == TAMProd){
+            printf("Limite de produtos atingido!\n");
+            break;
+        }
+
+    printf("\nDESEJA CADASTRAR OUTRO PRODUTO? (S ou N): ");
+    scanf(" %c", &continuar);
+        if(continuar == 'n' || continuar == 'N'){
+            break;
+        }
     }
 
 }
 
-void consultarCliente (Cliente *c) {
+void consultarCliente (Cliente c[], int qtd_clientes) {
 
-    for(int i=0; i < TAMCli; i++) {
+    if (qtd_clientes == 0){
+    printf("\nNAO HA CLIENTES CADASTRADOS!\n");
+    return;
+    }
 
-        printf("\nId Cliente: %d.",  c[i].id);
+    for(int i=0; i < qtd_clientes; i++) {
 
-        printf("\nPrimeiro Nome: %s.",  c[i].nome);
+        printf("\nId do Cliente: %d",  c[i].id);
+
+        printf("\nPrimeiro Nome: %s\n",  c[i].nome);
 
     }
 
-    printf("\n\n");
+    printf("\n");
 
 }
 
-void consultarProduto (Produto p[]) {
+void consultarProduto (Produto p[], int qtd_produtos) {
 
-    for(int i=0; i < TAMProd; i++) {
+    if (qtd_produtos == 0){
+    printf("\nNAO HA PRODUTOS CADASTRADOS\n");
+    return;
+    }
 
-        printf("\nId Produto: %d.",  p[i].id);
+        printf("\n----------------------------------");
+    for(int i=0; i < qtd_produtos; i++) {
 
-        printf("\nNome Produto: %s.", p[i].nome);
+        printf("\nId do Produto: %d",  p[i].id);
 
-        printf("\nQuantidade: %d.", p[i].quantidade);
+        printf("\nNome Produto: %s", p[i].nome);
 
-        printf("\nValor: %.2f.", p[i].valor);
+        printf("\nQuantidade: %d", p[i].quantidade);
+
+        printf("\nValor: %.2f", p[i].valor);
 
         printf("\n----------------------------------");
 
     }
 
-    printf("\n\n");
+    printf("\n");
 
 }
 
- 
+
 
 int main() {
 
     int opcao, sair=0; // sair inicialmente falso
 
-    Cliente clientes[5];
+    Cliente clientes[TAMCli];
+    Produto produtos[TAMProd];
 
-    Produto produtos[5];
+    int qtd_clientes = 0;
+    int qtd_produtos = 0;
 
- 
+    printf("<<<SEJA BEM VINDO!>>>");
 
     do {
 
         printf("\n\n>>>> Sistema de Vendas <<<< ");
+        printf("\n|Escolha uma opcao:|");
 
         printf("\n\t1 - Cadastrar Clientes");
 
@@ -140,25 +175,27 @@ int main() {
 
         printf("\n\t4 - Consultar Produtos");
 
-        printf("\n\t5 - Sair\n\t>>>> ");
+        printf("\n\t5 - Sair\n\t>>>>>> ");
 
         scanf("%d", &opcao);
 
+        printf("\n");
+
         if ( opcao == 1) {
 
-            cadastrarCliente(&clientes);
+            cadastrarCliente(clientes, &qtd_clientes);
 
         } else if ( opcao == 2 ) {
 
-            cadastrarProduto(&produtos);
+            cadastrarProduto(produtos, &qtd_produtos);
 
         } else if ( opcao == 3 ) {
 
-            consultarCliente(&clientes);
+            consultarCliente(clientes, qtd_clientes);
 
         } else if ( opcao == 4 ) {
 
-            consultarProduto(&produtos);
+            consultarProduto(produtos, qtd_produtos);
 
         } else if ( opcao == 5 ) {
 
@@ -166,13 +203,13 @@ int main() {
 
         } else {
 
-            printf("\n\nOpcao Invalida!");
+            printf("\n\nOPCAO INVALIDA!");
 
         }
 
     } while ( sair != 1 );
 
- 
+
 
     return 0;
 
