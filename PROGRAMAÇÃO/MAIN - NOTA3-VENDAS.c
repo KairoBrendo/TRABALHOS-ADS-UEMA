@@ -181,30 +181,30 @@ int main() {
 
         printf("\n");
 
-        if ( opcao == 1) {
+        switch (opcao){
 
-            cadastrarCliente(clientes, &qtd_clientes);
+            case 1:
+                cadastrarCliente(clientes, &qtd_clientes);
+                break;
+            
+            case 2:
+                cadastrarProduto(produtos, &qtd_produtos);
+                break;
 
-        } else if ( opcao == 2 ) {
+            case 3:
+                consultarCliente(clientes, qtd_clientes);
+                break;
 
-            cadastrarProduto(produtos, &qtd_produtos);
+            case 4:
+                consultarProduto(produtos, qtd_produtos);
+                break;
 
-        } else if ( opcao == 3 ) {
+            case 5:
+                sair = 1;
+                break;
 
-            consultarCliente(clientes, qtd_clientes);
-
-        } else if ( opcao == 4 ) {
-
-            consultarProduto(produtos, qtd_produtos);
-
-        } else if ( opcao == 5 ) {
-
-            sair = 1;
-
-        } else {
-
-            printf("\n\nOPCAO INVALIDA!");
-
+            default:
+                printf("\n\nOPCAO INVALIDA!");
         }
 
     } while ( sair != 1 );
