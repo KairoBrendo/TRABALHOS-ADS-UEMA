@@ -125,7 +125,7 @@ void consultarCliente (Cliente c[], int qtd_clientes) {
 void consultarProduto (Produto p[], int qtd_produtos) {
 
     if (qtd_produtos == 0){
-    printf("\nNAO HA PRODUTOS CADASTRADOS\n");
+    printf("\nNAO HA PRODUTOS CADASTRADOS!\n");
     return;
     }
 
