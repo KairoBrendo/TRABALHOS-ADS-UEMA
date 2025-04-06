@@ -5,7 +5,6 @@
 #define TAMProd 20
 
 
-
 typedef struct {
 
     int id;
