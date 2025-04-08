@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 #define TAMCli 10
-
 #define TAMProd 20
+#define TAMvenda 100
 
 
 typedef struct {
@@ -146,8 +146,23 @@ void consultarProduto (Produto p[], int qtd_produtos) {
     printf("\n");
 
 }
+//FUNÇÃO DE VENDAS:
+void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], int qtd_produtos, Venda vendas[], int *qtd_vendas)
+    int idCliente, idProduto, qtd_desejada;
+    int clienteExistente = 0, produtoExistente = 0;
+    int indiceCliente = -1, indiceProduto = -1;
 
+    if (*qtd_vendas >= TAMvenda){
+        printf("\nLIMITE DE VENDAS ATINGIDO!\n");
+    return;
+    }
 
+    if (qtd_clientes == 0 || qtd_produtos == 0)){
+        printf("\nNAO HA CLIENTES OU PRODUTOS CADASTRADOS PARA REALIZAR A VENDA!\n")
+    return;
+    }
+    
+    
 
 int main() {
 
@@ -155,9 +170,11 @@ int main() {
 
     Cliente clientes[TAMCli];
     Produto produtos[TAMProd];
+    Venda vendas [TAMvenda];
 
     int qtd_clientes = 0;
     int qtd_produtos = 0;
+    int qtd_vendas = 0;
 
     printf("<<<SEJA BEM VINDO!>>>");
 
@@ -174,7 +191,9 @@ int main() {
 
         printf("\n\t4 - Consultar Produtos");
 
-        printf("\n\t5 - Sair\n\t>>>>>> ");
+        printf("\n\t5 - Realizar Venda");
+
+        printf("\n\t6 - Sair\n\t>>>>>> ");
 
         scanf("%d", &opcao);
 
@@ -199,6 +218,10 @@ int main() {
                 break;
 
             case 5:
+                realizarVenda(clientes, qtd_clientes, produtos, qtd_produtos, vendas, &qtd_vendas);
+                break;
+
+            case 6:
                 sair = 1;
                 break;
 
