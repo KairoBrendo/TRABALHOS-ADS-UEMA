@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define TAMCli 10
 
 #define TAMProd 20
 
+#define TAMVend 20
 
 typedef struct {
 
@@ -105,30 +107,31 @@ void cadastrarProduto (Produto p[], int *qtd_produtos) {
 void consultarCliente (Cliente c[], int qtd_clientes) {
 
     if (qtd_clientes == 0){
-    printf("\nNAO HA CLIENTES CADASTRADOS!\n");
+    printf("\nNAO HA CLIENTES CADASTRADOS!\n\n");
+    system("pause");
     return;
     }
 
-    for(int i=0; i < qtd_clientes; i++) {
+    printf("\nLista de clientes cadastrados:\n");
 
-        printf("\nId do Cliente: %d",  c[i].id);
-
-        printf("\nPrimeiro Nome: %s\n",  c[i].nome);
-
+    for(int i=0; i < qtd_clientes; i++) { 
+        printf("\nCliente %d - %s", c[i].id, c[i].nome);
     }
 
-    printf("\n");
+    printf("\n\n");
+    system("pause");
 
 }
 
 void consultarProduto (Produto p[], int qtd_produtos) {
 
     if (qtd_produtos == 0){
-    printf("\nNAO HA PRODUTOS CADASTRADOS!\n");
-    return;
+        printf("\nNAO HA PRODUTOS CADASTRADOS!\n\n");
+        system("pause");
+        return;
     }
 
-        printf("\n----------------------------------");
+    printf("\n----------------------------------");
     for(int i=0; i < qtd_produtos; i++) {
 
         printf("\nId do Produto: %d",  p[i].id);
@@ -143,11 +146,30 @@ void consultarProduto (Produto p[], int qtd_produtos) {
 
     }
 
-    printf("\n");
+    printf("\n\n");
+    system("pause");
 
 }
 
+void consultarVenda (Venda v[], int qtd_vendas) {
+    if (qtd_vendas == 0) {
+        printf("\nNAO HA VENDAS REALIZADAS!\n\n");
+        system("pause");
+        return;
+    }
 
+    for (int i=0; i<qtd_vendas; i++) {
+
+        printf("\nID do comprador: %d", v[i].idCliente);
+
+        printf("\nID do produto vendido: %d", v[i].idProduto);
+        
+        printf("\nQuantidade do produto vendido: %d", v[i].quantProduto);
+
+        printf("\nValor arrecadado com a venda: %.2f", v[i].valorTotal);
+    }
+
+}
 
 int main() {
 
@@ -155,14 +177,19 @@ int main() {
 
     Cliente clientes[TAMCli];
     Produto produtos[TAMProd];
+    Venda vendas[TAMVend];
 
     int qtd_clientes = 0;
     int qtd_produtos = 0;
+    int qtd_vendas = 0;
 
-    printf("<<<SEJA BEM VINDO!>>>");
+    
 
     do {
 
+        system("cls");
+
+        printf("<<<SEJA BEM VINDO!>>>");
         printf("\n\n>>>> Sistema de Vendas <<<< ");
         printf("\n|Escolha uma opcao:|");
 
@@ -197,8 +224,12 @@ int main() {
             case 4:
                 consultarProduto(produtos, qtd_produtos);
                 break;
-
-            case 5:
+            case 6:
+                break;
+            case 7:
+                consultarVenda(vendas, qtd_vendas);
+                break;
+            case 8:
                 sair = 1;
                 break;
 
