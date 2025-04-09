@@ -56,7 +56,8 @@ void cadastrarCliente (Cliente c[], int *qtd_clientes) {
         (*qtd_clientes)++;
 
         if (*qtd_clientes == TAMCli) {
-            printf("\n|LIMITE DE CLIENTES ATINGIDO|\n");
+            printf("\nLIMITE DE CLIENTES ATINGIDO!\n");
+            system("pause");
             break;
         }
 
@@ -90,7 +91,8 @@ void cadastrarProduto (Produto p[], int *qtd_produtos) {
         (*qtd_produtos)++;
 
         if (*qtd_produtos == TAMProd){
-            printf("Limite de produtos atingido!\n");
+            printf("LIMITE DE PRODUTOS ATINGIDO!\n");
+            system("pause");
             break;
         }
 
@@ -159,11 +161,13 @@ void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], in
 
     if (*qtd_vendas >= TAMvenda){
         printf("\nLIMITE DE VENDAS ATINGIDO!\n");
+        system("pause");
     return;
     }
 
     if (qtd_clientes == 0 || qtd_produtos == 0){
         printf("\nNAO HA CLIENTES OU PRODUTOS CADASTRADOS PARA REALIZAR A VENDA!\n");
+        system("pause");
     return;
     }
 
@@ -179,6 +183,7 @@ void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], in
     }
     if (clienteExistente == 0){
         printf("\nCLIENTE NAO ENCONTRADO!\n");
+        system("pause");
         return;
     }
 
@@ -194,6 +199,7 @@ void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], in
     }
     if (produtoExistente == 0){
         printf("\nPRODUTO NAO ENCONTRADO!\n");
+        system("pause");
         return;
     }
 
@@ -202,7 +208,8 @@ void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], in
 
     if (qtd_desejada > produtos[indiceProduto].quantidade){
         printf("\nESTOQUE INDISPONIVEL!");
-        printf("\n DISPONIVEL SOMENTE %d UNIDADES DESSE PRODUTO", produtos[indiceProduto].quantidade);
+        printf("\nDISPONIVEL SOMENTE %d UNIDADES DESSE PRODUTO\n", produtos[indiceProduto].quantidade);
+        system("pause");
         return;
     }
 
@@ -217,9 +224,11 @@ void realizarVenda (Cliente clientes[], int qtd_clientes, Produto produtos[], in
     printf("\nCliente: %s", clientes[indiceCliente].nome);
     printf("\nProduto: %s", produtos[indiceProduto].nome);
     printf("\nQuantidade: %d", qtd_desejada);
-    printf("\nValor total: R$ %.2f\n", vendas[*qtd_vendas].valorTotal);
-
+    printf("\nValor total da venda: R$ %.2f", vendas[*qtd_vendas].valorTotal);
+    printf("\nValor de cada unidade: (R$ %.2f)\n", produtos[indiceProduto].valor);
     *qtd_vendas = *qtd_vendas + 1;
+
+    system("pause");
 }
     
     
@@ -291,7 +300,8 @@ int main() {
                 break;
 
             default:
-                printf("\n\nOPCAO INVALIDA!");
+                printf("\n\nOPCAO INVALIDA!\n");
+                system("pause");
         }
 
     } while ( sair != 1 );
