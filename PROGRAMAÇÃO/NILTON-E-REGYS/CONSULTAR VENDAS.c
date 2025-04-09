@@ -5,7 +5,7 @@
 
 #define TAMProd 20
 
-#define TAMVend 20
+#define TAMVenda 20
 
 typedef struct {
 
@@ -177,7 +177,7 @@ int main() {
 
     Cliente clientes[TAMCli];
     Produto produtos[TAMProd];
-    Venda vendas[TAMVend];
+    Venda vendas[TAMVenda];
 
     int qtd_clientes = 0;
     int qtd_produtos = 0;
@@ -201,7 +201,11 @@ int main() {
 
         printf("\n\t4 - Consultar Produtos");
 
-        printf("\n\t5 - Sair\n\t>>>>>> ");
+        printf("\n\t5 - Realizar Venda");
+
+        printf("\n\t6 - Consultar Vendas");
+
+        printf("\n\t7 - Sair\n\t>>>>>> ");
 
         scanf("%d", &opcao);
 
@@ -224,12 +228,12 @@ int main() {
             case 4:
                 consultarProduto(produtos, qtd_produtos);
                 break;
-            case 6:
+            case 5:
                 break;
-            case 7:
+            case 6:
                 consultarVenda(vendas, qtd_vendas);
                 break;
-            case 8:
+            case 7:
                 sair = 1;
                 break;
 
