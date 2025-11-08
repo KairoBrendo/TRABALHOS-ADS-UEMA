@@ -2,7 +2,7 @@
 // DOCENTE: Yonara Costa Magalhães
 // DISCIPLINA: Estrutura de Dados
 // ATIVIDADE: Nota 3 - Implementação de código e apresentação - CENÁRIO 2 FARMÁCIA
-// DESCRIÇÃO: O programa ordena os preços de 500 medicamentos de uma farmácia em ordem decrescente, utilizando o algoritmo Quick Sort.
+// DESCRIÇÃO: O programa ordena os preços de 500 medicamentos de uma farmácia em ordem decrescente, utilizando o algoritmo Quick Sort...
 
 
 #include <stdio.h>
